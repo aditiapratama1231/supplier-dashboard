@@ -10,12 +10,14 @@ require (
 	github.com/coreos/go-systemd v0.0.0-20190620071333-e64a0ec8b42a // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.4.0
+	github.com/go-kit/kit v0.8.0
 	github.com/gobuffalo/fizz v1.9.1 // indirect
 	github.com/gobuffalo/genny v0.3.0 // indirect
 	github.com/gobuffalo/packr/v2 v2.5.1 // indirect
 	github.com/golang/mock v1.3.1 // indirect
 	github.com/google/pprof v0.0.0-20190515194954-54271f7e092f // indirect
 	github.com/googleapis/gax-go/v2 v2.0.5 // indirect
+	github.com/gorilla/mux v1.7.3
 	github.com/grpc-ecosystem/grpc-gateway v1.9.2 // indirect
 	github.com/jinzhu/gorm v1.9.9 // indirect
 	github.com/kisielk/errcheck v1.2.0 // indirect
