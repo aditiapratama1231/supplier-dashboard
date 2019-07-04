@@ -16,19 +16,25 @@ func NewHTTPServer(ctx context.Context, endpoints endpoint.Endpoints) http.Handl
 	r := mux.NewRouter()
 	r.Use(commonMiddleware) // @see https://stackoverflow.com/a/51456342
 
-	// products api
-	r.Methods("GET").Path("/products").Handler(httptransport.NewServer(
+	// products handlers
+	getProductsHandler := httptransport.NewServer(
 		endpoints.GetProductsEndpoint,
 		request.DecodeGetProductsRequest,
 		request.EncodeResponse,
-	))
+	)
 
-	//brands api
-	r.Methods("GET").Path("/brands").Handler(httptransport.NewServer(
+	//brands handlers
+	getBrandsHandler := httptransport.NewServer(
 		endpoints.GetBrandsEndpoint,
 		request.DecodeGetBrandsRequest,
 		request.EncodeResponse,
-	))
+	)
+
+	// products client endpoints
+	r.Handle("/products", getProductsHandler).Methods("GET")
+
+	// brands client endpoints
+	r.Handle("/brands", getBrandsHandler).Methods("GET")
 
 	return r
 }
