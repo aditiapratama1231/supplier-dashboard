@@ -1,12 +1,11 @@
-package server
+package transport
 
 import (
 	"context"
 	"net/http"
 
 	"qasir-supplier/inventory/pkg/endpoint"
-
-	transport "qasir-supplier/inventory/pkg/transport/http"
+	request "qasir-supplier/inventory/pkg/request/http"
 
 	httptransport "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
@@ -20,15 +19,15 @@ func NewHTTPServer(ctx context.Context, endpoints endpoint.Endpoints) http.Handl
 	// products api
 	r.Methods("GET").Path("/products").Handler(httptransport.NewServer(
 		endpoints.GetProductsEndpoint,
-		transport.DecodeGetProductsRequest,
-		transport.EncodeResponse,
+		request.DecodeGetProductsRequest,
+		request.EncodeResponse,
 	))
 
 	//brands api
 	r.Methods("GET").Path("/brands").Handler(httptransport.NewServer(
 		endpoints.GetBrandsEndpoint,
-		transport.DecodeGetBrandsRequest,
-		transport.EncodeResponse,
+		request.DecodeGetBrandsRequest,
+		request.EncodeResponse,
 	))
 
 	return r

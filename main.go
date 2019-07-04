@@ -11,8 +11,8 @@ import (
 	"syscall"
 
 	"qasir-supplier/inventory/pkg/endpoint"
-	httpserver "qasir-supplier/inventory/pkg/server/http"
 	"qasir-supplier/inventory/pkg/service"
+	transport "qasir-supplier/inventory/pkg/transport"
 )
 
 func main() {
@@ -46,7 +46,7 @@ func main() {
 	// HTTP transport
 	go func() {
 		log.Println("inventory service is listening on port:", *httpAddr)
-		handler := httpserver.NewHTTPServer(ctx, endpoints)
+		handler := transport.NewHTTPServer(ctx, endpoints)
 		errChan <- http.ListenAndServe(*httpAddr, handler)
 	}()
 

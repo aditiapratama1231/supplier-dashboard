@@ -4,13 +4,12 @@ import (
 	"context"
 	"errors"
 
+	transport "qasir-supplier/inventory/pkg/request/http" // part of transport
 	"qasir-supplier/inventory/pkg/service"
-	transport "qasir-supplier/inventory/pkg/transport/http"
 
 	"github.com/go-kit/kit/endpoint"
 )
 
-// MakeGetEndpoint returns the response from our service "get"
 func MakeGetProductsEndpoint(srv service.ProductService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		_ = request.(transport.GetProductsRequest) // we really just need the request, we don't use any value from it
@@ -22,7 +21,6 @@ func MakeGetProductsEndpoint(srv service.ProductService) endpoint.Endpoint {
 	}
 }
 
-// Get endpoint mapping
 func (e Endpoints) GetProducts(ctx context.Context) (string, error) {
 	req := transport.GetProductsRequest{}
 	resp, err := e.GetProductsEndpoint(ctx, req)

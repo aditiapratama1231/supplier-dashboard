@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
+	transport "qasir-supplier/inventory/pkg/request/http" // part of transport
 	"qasir-supplier/inventory/pkg/service"
-	transport "qasir-supplier/inventory/pkg/transport/http"
 
 	"github.com/go-kit/kit/endpoint"
 )
