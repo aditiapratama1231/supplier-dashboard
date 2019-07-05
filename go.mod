@@ -8,6 +8,7 @@ require (
 	github.com/coreos/etcd v3.3.13+incompatible // indirect
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/coreos/go-systemd v0.0.0-20190620071333-e64a0ec8b42a // indirect
+	github.com/drhodes/golorem v0.0.0-20160418191928-ecccc744c2d9 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-kit/kit v0.8.0
@@ -15,6 +16,7 @@ require (
 	github.com/gobuffalo/genny v0.3.0 // indirect
 	github.com/gobuffalo/packr/v2 v2.5.1 // indirect
 	github.com/golang/mock v1.3.1 // indirect
+	github.com/golang/protobuf v1.3.1
 	github.com/google/pprof v0.0.0-20190515194954-54271f7e092f // indirect
 	github.com/googleapis/gax-go/v2 v2.0.5 // indirect
 	github.com/gorilla/mux v1.7.3
@@ -28,6 +30,7 @@ require (
 	github.com/prometheus/common v0.6.0 // indirect
 	github.com/prometheus/procfs v0.0.3 // indirect
 	github.com/rogpeppe/fastuuid v1.1.0 // indirect
+	github.com/ru-rocker/gokit-playground v0.0.0-20171224044615-d5bb41590321
 	github.com/russross/blackfriday v2.0.0+incompatible // indirect
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
@@ -45,5 +48,5 @@ require (
 	google.golang.org/api v0.7.0 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
 	google.golang.org/genproto v0.0.0-20190626174449-989357319d63 // indirect
-	google.golang.org/grpc v1.21.1 // indirect
+	google.golang.org/grpc v1.21.1
 )
