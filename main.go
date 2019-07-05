@@ -16,13 +16,22 @@ import (
 	"qasir-supplier/inventory/pkg/service"
 	transport "qasir-supplier/inventory/pkg/transport"
 
+	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 )
 
 func main() {
+	e := godotenv.Load() //Load .env file
+	if e != nil {
+		fmt.Print(e)
+	}
+
+	grpcPort := os.Getenv("INVENTORY_GRPC_PORT")
+	httpPort := os.Getenv("INVENTORY_HTTP_PORT")
+
 	var (
-		httpAddr = flag.String("http", ":8080", "http listen address")
-		grpcAddr = flag.String("grpc", ":8081", "gRPC listen address")
+		httpAddr = flag.String("http", httpPort, "http listen address")
+		grpcAddr = flag.String("grpc", grpcPort, "gRPC listen address")
 	)
 	flag.Parse()
 	ctx := context.Background()
