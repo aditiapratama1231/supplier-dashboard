@@ -1,5 +1,8 @@
 create_table("products") {
   t.Column("id", "integer", {primary: true})
+  t.Column("category_id", "integer", {})
+  t.Column("brand_id", "integer", {})
+  t.Column("merchant_id", "integer", {})
   t.Column("product_code", "string",{"null":true})
   t.Column("name", "string",{})
   t.Column("description", "text",{"null":true})
@@ -11,9 +14,5 @@ create_table("products") {
   t.Column("created_at", "timestamp", {"null": true})
   t.Column("updated_at", "timestamp", {"null": true})
   t.Column("deleted_at", "timestamp", {"null": true})
-  t.Column("merchant_id", "integer", {})
-  t.Column("old_id", "integer", {"size":10})
-  t.Column("old_category_id", "integer", {"size":10, "null":true})
-  t.Column("old_brand_id", "integer", {"size":10, "null":true})
   t.Column("is_published", "tinyint", {"size":4})
 }

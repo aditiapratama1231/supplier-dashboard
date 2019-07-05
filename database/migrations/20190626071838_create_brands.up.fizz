@@ -10,6 +10,4 @@ create_table("brands") {
   t.Column("created_at", "timestamp", {"null": true})
   t.Column("updated_at", "timestamp", {"null": true})
   t.Column("deleted_at", "timestamp", {"null": true})
-  t.Column("old_id", "integer", {"size":10})
-  
 }

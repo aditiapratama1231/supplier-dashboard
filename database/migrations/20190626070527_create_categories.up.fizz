@@ -1,5 +1,6 @@
 create_table("categories") {
   t.Column("id", "integer", {primary: true})
+  t.Column("merchant_id", "integer", {})
   t.Column("name", "string", {"null": true})
   t.Column("slug", "string", {"null": true})
   t.Column("created_by", "integer", {"size":10, "null": true})
@@ -8,7 +9,5 @@ create_table("categories") {
   t.Column("created_at", "timestamp", {"null": true})
   t.Column("updated_at", "timestamp", {"null": true})
   t.Column("deleted_at", "timestamp", {"null": true})
-  t.Column("old_id", "integer", {"size":10})
   t.Column("parent", "integer", {"null": true})
-
 }
