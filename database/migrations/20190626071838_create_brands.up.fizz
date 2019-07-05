@@ -1,0 +1,15 @@
+create_table("brands") {
+  t.Column("id", "integer", {primary: true})
+  t.Column("name", "string", {})
+  t.Column("description", "text", {"null": true})
+  t.Column("logo", "string", {"null": true})
+  t.Column("slug", "string", {"null": true})
+  t.Column("created_by", "integer", {"size":10, "null": true})
+  t.Column("updated_by", "integer", {"size":10, "null": true})
+  t.Column("deleted_by", "integer", {"size":10, "null": true})
+  t.Column("created_at", "timestamp", {"null": true})
+  t.Column("updated_at", "timestamp", {"null": true})
+  t.Column("deleted_at", "timestamp", {"null": true})
+  t.Column("old_id", "integer", {"size":10})
+  
+}
