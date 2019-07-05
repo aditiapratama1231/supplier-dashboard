@@ -4,7 +4,7 @@ import (
 	"context"
 	"qasir-supplier/inventory/pb"
 
-	transport "qasir-supplier/inventory/pkg/request/http"
+	model "qasir-supplier/inventory/pkg/request/model"
 )
 
 func EncodeGRPCProductRequest(_ context.Context, r interface{}) (interface{}, error) {
@@ -12,11 +12,11 @@ func EncodeGRPCProductRequest(_ context.Context, r interface{}) (interface{}, er
 }
 
 func DecodeGRPCProductRequest(ctx context.Context, r interface{}) (interface{}, error) {
-	return transport.GetProductsRequest{}, nil
+	return model.GetProductsRequest{}, nil
 }
 
 func EncodeGRPCProductResponse(_ context.Context, r interface{}) (interface{}, error) {
-	resp := r.(transport.GetProductsResponse)
+	resp := r.(model.GetProductsResponse)
 	return &pb.ProductResponse{
 		Message: resp.Products,
 		Err:     resp.Err,
@@ -25,7 +25,7 @@ func EncodeGRPCProductResponse(_ context.Context, r interface{}) (interface{}, e
 
 func DecodeGRPCProductResponse(_ context.Context, r interface{}) (interface{}, error) {
 	resp := r.(*pb.ProductResponse)
-	return transport.GetProductsResponse{
+	return model.GetProductsResponse{
 		Products: resp.Message,
 		Err:      resp.Err,
 	}, nil
