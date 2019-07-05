@@ -22,7 +22,7 @@ import (
 func main() {
 	var (
 		httpAddr = flag.String("http", ":8080", "http listen address")
-		grpcAddr = flag.String("grpc", "8081", "gRPC listen address")
+		grpcAddr = flag.String("grpc", ":8081", "gRPC listen address")
 	)
 	flag.Parse()
 	ctx := context.Background()
@@ -48,33 +48,36 @@ func main() {
 		GetBrandsEndpoint: endpoint.MakeGetBrandsEndpoint(srvBrand),
 	}
 
-	// HTTP transport
+	// Run HTTP Server
 	go func() {
-		log.Println("inventory service is listening on port:", *httpAddr)
+		log.Println("Inventory Service (http) is listening on port", *httpAddr)
 		handler := transport.NewHTTPServer(ctx, endpoints)
 		errChan <- http.ListenAndServe(*httpAddr, handler)
 	}()
 
-	// GRPC Transport
+	// Run GRPC Server
 	go func() {
 		grpcListener, err := net.Listen("tcp", *grpcAddr)
 		if err != nil {
 			log.Println("Error connecting grpc server : ", err)
 		}
+
+		log.Println("Inventory Service (grpc) is listening on port", *grpcAddr)
+
 		defer grpcListener.Close()
 
-		grpcServer := grpc.NewServer()
-		if err := grpcServer.Serve(grpcListener); err != nil {
-			log.Println("Something Went Wrong", err)
-		}
-
 		handler := transport.NewGRPCServer(ctx, endpoints)
+		grpcServer := grpc.NewServer()
 
 		// register products server
 		pb.RegisterProductsServer(grpcServer, handler)
 
 		// register brands server
+		/*TODO*/
 
+		if err := grpcServer.Serve(grpcListener); err != nil {
+			log.Println("Failed To Serve", err)
+		}
 	}()
 
 	log.Fatalln(<-errChan)
