@@ -6,6 +6,7 @@ service Products {
 }
 
 message ProductRequest {
+    int64 id = 1;
 }
 
 message ProductResponse {

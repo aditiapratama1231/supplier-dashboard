@@ -1,0 +1,10 @@
+create_table("variant_wholesalers") {
+  t.Column("id", "integer", {primary: true})
+  t.Column("quantity_minimum", "decimal",{"size":8.2, "null":true})
+  t.Column("wholesale_price", "double",{"null":true})
+  t.Column("created_at", "timestamp", {"null": true})
+  t.Column("updated_at", "timestamp", {"null": true})
+  t.Column("deleted_at", "timestamp", {"null": true})
+  t.Column("old_id", "integer", {"size":10})
+  t.Column("old_variant_id", "integer", {"size":10, "null": true})
+}

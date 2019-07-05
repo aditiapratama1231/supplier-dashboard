@@ -1,0 +1,6 @@
+create_table("product_outlets") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("products_id", "integer")
+	t.Column("outlets_id", "integer")	
+	t.Timestamps()
+}
