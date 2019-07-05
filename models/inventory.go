@@ -10,6 +10,9 @@ import (
 type Inventory struct {
 	gorm.Model
 	ID         int64     `gorm:"column:id" gorm:"primary_key" json:"id"`
+	VariantID  int64     `gorm:"column:variant_id" json:"variant_id"`
+	OutletID   int64     `gorm:"column:outlet_id" json:"outlet_id"`
+	MerchantID int64     `gorm:"column:merchant_id" json:"merchant_id"`
 	TrackStock int8      `gorm:"column:track_stock" json:"track_stock"`
 	AlertStock int8      `gorm:"column:alert_stock" json:"alert_stock"`
 	StockMin   float64   `gorm:"column:stock_min" json:"stock_min"`

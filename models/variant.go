@@ -10,6 +10,8 @@ import (
 type Variant struct {
 	gorm.Model
 	ID             int64     `gorm:"column:id" gorm:"primary_key" json:"id"`
+	ProductID      int64     `gorm:"column:product_id" json:"product_id"`
+	MerchantID     int64     `gorm:"column:merchant_id" json:"merchant_id"`
 	Name           string    `gorm:"column:name" json:"name"`
 	Sku            string    `gorm:"column:sku" json:"sku"`
 	PriceBase      float64   `gorm:"column:price_base" json:"price_base"`
