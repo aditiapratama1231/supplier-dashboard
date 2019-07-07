@@ -5,11 +5,19 @@ service Products {
     rpc GetProducts(ProductRequest) returns (ProductResponse) {}
 }
 
+message Product {
+    int64 id = 1;
+    string product_code = 2;
+    string name = 3;
+    string description = 4;
+    string image = 5;
+}
+
 message ProductRequest {
     int64 id = 1;
 }
 
 message ProductResponse {
-    string message = 1;
+    repeated Product products = 1;
     string err = 2;
 }

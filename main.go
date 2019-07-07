@@ -26,12 +26,12 @@ func main() {
 		fmt.Print(e)
 	}
 
-	grpcPort := os.Getenv("INVENTORY_GRPC_PORT")
 	httpPort := os.Getenv("INVENTORY_HTTP_PORT")
+	grpcPort := os.Getenv("INVENTORY_GRPC_PORT")
 
 	var (
-		httpAddr = flag.String("http", httpPort, "http listen address")
-		grpcAddr = flag.String("grpc", grpcPort, "gRPC listen address")
+		httpAddr = flag.String("http", ":"+httpPort, "http listen address")
+		grpcAddr = flag.String("grpc", ":"+grpcPort, "gRPC listen address")
 	)
 	flag.Parse()
 	ctx := context.Background()
@@ -51,7 +51,11 @@ func main() {
 	// mapping endpoints
 	endpoints := endpoint.Endpoints{
 		// products endpoint
-		GetProductsEndpoint: endpoint.MakeGetProductsEndpoint(srvProduct),
+		GetProductsEndpoint:   endpoint.MakeGetProductsEndpoint(srvProduct),
+		CreateProductEndpoint: endpoint.MakeCreateProductEndpoint(srvProduct),
+		ShowProductsEndpoint:  endpoint.MakeShowProductEndpoint(srvProduct),
+		UpdateProductEnpoint:  endpoint.MakeUpdateProductEndpoint(srvProduct),
+		DeleteProductEnpoint:  endpoint.MakeDeleteProductEndpoint(srvProduct),
 
 		// brands endpoint
 		GetBrandsEndpoint: endpoint.MakeGetBrandsEndpoint(srvBrand),

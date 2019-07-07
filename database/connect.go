@@ -28,6 +28,8 @@ func DBInit() *gorm.DB {
 	if err != nil {
 		panic("failed to connect to database")
 	}
-	fmt.Println("connected to database")
+
+	db.LogMode(true)
+
 	return db
 }

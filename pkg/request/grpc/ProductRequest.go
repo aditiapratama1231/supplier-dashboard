@@ -18,8 +18,8 @@ func DecodeGRPCProductRequest(ctx context.Context, r interface{}) (interface{}, 
 func EncodeGRPCProductResponse(_ context.Context, r interface{}) (interface{}, error) {
 	resp := r.(model.GetProductsResponse)
 	return &pb.ProductResponse{
-		Message: resp.Products,
-		Err:     resp.Err,
+		Products: resp.Products,
+		Err:      resp.Err,
 	}, nil
 }
 

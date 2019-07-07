@@ -23,6 +23,30 @@ func NewHTTPServer(ctx context.Context, endpoints endpoint.Endpoints) http.Handl
 		request.EncodeResponse,
 	)
 
+	showProductHandler := httptransport.NewServer(
+		endpoints.ShowProductsEndpoint,
+		request.DecodeShowProductRequest,
+		request.EncodeResponse,
+	)
+
+	createProductHandler := httptransport.NewServer(
+		endpoints.CreateProductEndpoint,
+		request.DecodeCreateProductRequest,
+		request.EncodeResponse,
+	)
+
+	updateProductHandler := httptransport.NewServer(
+		endpoints.UpdateProductEnpoint,
+		request.DecodeUpdateProductRequest,
+		request.EncodeResponse,
+	)
+
+	deleteProductHandler := httptransport.NewServer(
+		endpoints.DeleteProductEnpoint,
+		request.DecodeDeleteProductRequest,
+		request.EncodeResponse,
+	)
+
 	//brands handlers
 	getBrandsHandler := httptransport.NewServer(
 		endpoints.GetBrandsEndpoint,
@@ -32,6 +56,10 @@ func NewHTTPServer(ctx context.Context, endpoints endpoint.Endpoints) http.Handl
 
 	// products client endpoints
 	r.Handle("/products", getProductsHandler).Methods("GET")
+	r.Handle("/products/create", createProductHandler).Methods("POST")
+	r.Handle("/products/{id}", showProductHandler).Methods("GET")
+	r.Handle("/products/{id}/update", updateProductHandler).Methods("PATCH")
+	r.Handle("/products/{id}/delete", deleteProductHandler).Methods("DELETE")
 
 	// brands client endpoints
 	r.Handle("/brands", getBrandsHandler).Methods("GET")
