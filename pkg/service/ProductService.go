@@ -1,9 +1,10 @@
 package service
 
 import (
-	db "qasir-supplier/inventory/database"
 	models "qasir-supplier/inventory/models"
 	payload "qasir-supplier/inventory/pkg/request/payload" // part of transport
+
+	"github.com/jinzhu/gorm"
 )
 
 type ProductService interface {
@@ -16,7 +17,10 @@ type ProductService interface {
 
 type productService struct{}
 
-func NewProdutService() ProductService {
+var query *gorm.DB
+
+func NewProdutService(db *gorm.DB) ProductService {
+	query = db
 	return productService{}
 }
 
@@ -24,10 +28,9 @@ func NewProdutService() ProductService {
 func (productService) GetProducts() (*[]models.Product, error) {
 	var products []models.Product
 
-	query := db.DBInit()
 	query.Find(&products)
 
-	defer db.DBInit().Close()
+	// defer query.Close()
 
 	return &products, nil
 }
@@ -35,10 +38,9 @@ func (productService) GetProducts() (*[]models.Product, error) {
 func (productService) ShowProduct(id string) (models.Product, error) {
 	var product models.Product
 
-	query := db.DBInit()
 	query.Find(&product, id)
 
-	defer db.DBInit().Close()
+	// defer query.Close()
 
 	return product, nil
 }
@@ -55,7 +57,7 @@ func (productService) CreateProduct(data payload.CreateProductRequest) payload.C
 		HasText:     data.HasText,
 		IsPublished: data.IsPublished,
 	}
-	err := models.InsertProduct(db.DBInit(), &product)
+	err := models.InsertProduct(query, &product)
 	if err != nil {
 		return payload.CreateProductResponse{
 			Message:    err.Error(),
@@ -63,7 +65,7 @@ func (productService) CreateProduct(data payload.CreateProductRequest) payload.C
 		}
 	}
 
-	defer db.DBInit().Close()
+	// defer query.Close()
 	return payload.CreateProductResponse{
 		Message:    "Product Successfully Created",
 		StatusCode: 201,
@@ -72,7 +74,6 @@ func (productService) CreateProduct(data payload.CreateProductRequest) payload.C
 
 func (productService) UpdateProduct(data payload.UpdateProductRequest, id string) payload.UpdateProductResponse {
 	var product models.Product
-	query := db.DBInit()
 	if query.Find(&product, id).RecordNotFound() {
 		return payload.UpdateProductResponse{
 			Message:    "Product Not Found",
@@ -99,7 +100,6 @@ func (productService) UpdateProduct(data payload.UpdateProductRequest, id string
 
 func (productService) DeleteProduct(id string) payload.DeleteProductResponse {
 	var product models.Product
-	query := db.DBInit()
 	if query.Find(&product, id).RecordNotFound() {
 		return payload.DeleteProductResponse{
 			Message:    "Product Not Found",
