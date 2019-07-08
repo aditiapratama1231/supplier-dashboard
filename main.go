@@ -5,19 +5,21 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"net"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"qasir-supplier/inventory/pb"
+	// "net"
+
+	// "qasir-supplier/inventory/pb"
+	"qasir-supplier/inventory/database"
 	"qasir-supplier/inventory/pkg/endpoint"
 	"qasir-supplier/inventory/pkg/service"
 	transport "qasir-supplier/inventory/pkg/transport"
 
 	"github.com/joho/godotenv"
-	"google.golang.org/grpc"
+	// "google.golang.org/grpc"
 )
 
 func main() {
@@ -26,19 +28,22 @@ func main() {
 		fmt.Print(e)
 	}
 
+	// Connect to database
+	db := database.DBInit()
+
 	httpPort := os.Getenv("INVENTORY_HTTP_PORT")
-	grpcPort := os.Getenv("INVENTORY_GRPC_PORT")
+	// grpcPort := os.Getenv("INVENTORY_GRPC_PORT")
 
 	var (
 		httpAddr = flag.String("http", ":"+httpPort, "http listen address")
-		grpcAddr = flag.String("grpc", ":"+grpcPort, "gRPC listen address")
+		// grpcAddr = flag.String("grpc", ":"+grpcPort, "gRPC listen address")
 	)
 	flag.Parse()
 	ctx := context.Background()
 
 	// define our inventory services
-	srvProduct := service.NewProdutService()
-	srvBrand := service.NewBrandService()
+	srvProduct := service.NewProdutService(db)
+	srvBrand := service.NewBrandService(db)
 
 	errChan := make(chan error)
 
@@ -69,29 +74,29 @@ func main() {
 	}()
 
 	// Run GRPC Server
-	go func() {
-		grpcListener, err := net.Listen("tcp", *grpcAddr)
-		if err != nil {
-			log.Println("Error connecting grpc server : ", err)
-		}
+	// go func() {
+	// 	grpcListener, err := net.Listen("tcp", *grpcAddr)
+	// 	if err != nil {
+	// 		log.Println("Error connecting grpc server : ", err)
+	// 	}
 
-		log.Println("Inventory Service (grpc) is listening on port", *grpcAddr)
+	// 	log.Println("Inventory Service (grpc) is listening on port", *grpcAddr)
 
-		defer grpcListener.Close()
+	// 	defer grpcListener.Close()
 
-		handler := transport.NewGRPCServer(ctx, endpoints)
-		grpcServer := grpc.NewServer()
+	// 	handler := transport.NewGRPCServer(ctx, endpoints)
+	// 	grpcServer := grpc.NewServer()
 
-		// register products server
-		pb.RegisterProductsServer(grpcServer, handler)
+	// 	// register products server
+	// 	pb.RegisterProductsServer(grpcServer, handler)
 
-		// register brands server
-		/*TODO*/
+	// 	// register brands server
+	// 	/*TODO*/
 
-		if err := grpcServer.Serve(grpcListener); err != nil {
-			log.Println("Failed To Serve", err)
-		}
-	}()
+	// 	if err := grpcServer.Serve(grpcListener); err != nil {
+	// 		log.Println("Failed To Serve", err)
+	// 	}
+	// }()
 
 	log.Fatalln(<-errChan)
 }

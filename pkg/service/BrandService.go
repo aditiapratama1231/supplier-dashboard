@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+
+	"github.com/jinzhu/gorm"
 )
 
 type BrandService interface {
@@ -10,7 +12,8 @@ type BrandService interface {
 
 type brandService struct{}
 
-func NewBrandService() BrandService {
+func NewBrandService(db *gorm.DB) BrandService {
+	query = db
 	return brandService{}
 }
 
