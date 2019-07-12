@@ -13,6 +13,20 @@ test:
 fmt:
 	go fmt ./... -v
 
+migrate:
+	@which soda > /dev/null; if [ $$? -ne 0 ]; then \
+		go get -u -v github.com/gobuffalo/pop/...; \
+		go install -v github.com/gobuffalo/pop/soda; \
+	fi
+	soda migrate -p database up
+
+migrate_reset:
+	@which soda > /dev/null; if [ $$? -ne 0 ]; then \
+		go get -u -v github.com/gobuffalo/pop/...; \
+		go install -v github.com/gobuffalo/pop/soda; \
+	fi
+	soda migrate -p database reset
+
 release:
 	git tag -a $(VERSION) -m "Release" || true
 	git push origin $(VERSION)
