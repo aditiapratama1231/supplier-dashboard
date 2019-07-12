@@ -1,0 +1,16 @@
+create_table("inventories") {
+  t.Column("id", "integer", {primary: true})
+  t.Column("outlet_id", "integer", {"size":10, "null": true})
+  t.Column("variant_id", "integer", {"size":10, "null": true})
+  t.Column("track_stock", "tinyint", {"size":1})
+  t.Column("alert_stock", "tinyint", {"size":1})
+  t.Column("stock_min", "decimal", {"size":12.2, "null":true})
+  t.Column("stock_in", "decimal", {"size":12.2})
+  t.Column("stock_out", "decimal", {"size":12.2})
+  t.Column("created_by", "integer", {"size":10, "null": true})
+  t.Column("updated_by", "integer", {"size":10, "null": true})
+  t.Column("deleted_by", "integer", {"size":10, "null": true})
+  t.Column("created_at", "timestamp", {"null": true})
+  t.Column("updated_at", "timestamp", {"null": true})
+  t.Column("deleted_at", "timestamp", {"null": true})
+}

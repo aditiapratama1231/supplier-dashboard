@@ -1,0 +1,22 @@
+.env
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.out
+vendor/
+
+# Test binary, built with `go test -c`
+*.test
+
+# All people should put all of these to global gitignore, but let's make sure no one do the dumb things.
+.vscode/
+.idea/
+.DS_store
+*.orig
+\#*#
+._*
+*~
