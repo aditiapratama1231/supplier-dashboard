@@ -1,2 +1,1 @@
-Qasir Backend Core With Following Services
-
+# Supplier Dashboard Service
