@@ -1,0 +1,7 @@
+create_table("order_limits") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("variant_id", "integer")
+  	t.Column("min_qty", "decimal", {"size": 12.2, "null":true})
+	t.Column("max_qty", "decimal", {"size": 12.2, "null":true})
+	t.Timestamps()
+}

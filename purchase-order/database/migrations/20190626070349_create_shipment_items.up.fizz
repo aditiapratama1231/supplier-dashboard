@@ -1,0 +1,13 @@
+create_table("shipment_items") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("shipment_id", "integer")
+	t.Column("order_item_id", "bigint")
+	t.Column("variant_id", "integer")
+	t.Column("price", "float", {"null":true})
+	t.Column("qty", "float", {"null":true})
+	t.Column("weight", "float", {"null":true})
+	t.Column("name", "string", {"size":255, "null":true})
+	t.Column("sku", "string", {"size":255, "null":true})
+	t.Column("volume", "float", {"null":true})
+	t.Timestamps()
+}

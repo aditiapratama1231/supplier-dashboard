@@ -1,0 +1,13 @@
+create_table("shipments") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("order_id", "integer")
+	t.Column("total_weight", "float", {"null":true})
+	t.Column("total_qty", "float", {"null":true})
+	t.Column("outlet_id", "integer")
+	t.Column("shipping_no", "string", {"size":32, "null":true})
+	t.Column("shipping_note", "string", {"size":255, "null":true})
+	t.Column("customer_note", "string", {"size":255, "null":true})
+	t.Column("status", "tinyint", {"size":2, "null":true})
+	t.Column("deleted_at", "datetime", {"null":true})
+	t.Timestamps()
+}
