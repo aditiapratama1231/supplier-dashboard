@@ -1,0 +1,7 @@
+create_table("order_statuses") {
+	t.Column("id", "integer", {primary: true})
+  	t.Column("code", "string", {"sizze":32})
+  	t.Column("name", "string", {"sizze":64, "null":true})
+  	t.Column("order", "tinyint", {"sizze":2})	
+	t.Timestamps()
+}

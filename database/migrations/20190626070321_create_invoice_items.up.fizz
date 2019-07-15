@@ -1,0 +1,11 @@
+create_table("invoice_items") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("invoice_id", "integer")
+	t.Column("variant_id", "integer")
+	t.Column("qty", "float", {"null":true})
+	t.Column("price", "float", {"null":true})
+	t.Column("sku", "string", {"size":64,"null":true})
+	t.Column("name", "string", {"size":255,"null":true})
+	t.Column("invoice_itemscol", "string", {"size":45,"null":true})
+	t.Timestamps()
+}

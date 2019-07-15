@@ -1,0 +1,18 @@
+create_table("order_items") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("variant_id", "integer")
+  	t.Column("order_id", "integer")
+	t.Column("qty", "float", {"null":true})
+	t.Column("qty_invoice", "float", {"null":true})
+	t.Column("qty_shipped", "float", {"null":true})
+	t.Column("qty_canceled", "float", {"null":true})
+	t.Column("qty_refunded", "float", {"null":true})
+	t.Column("price_sell", "float", {"null":true})
+	t.Column("price_sell_unit", "float", {"null":true})
+	t.Column("price_base", "float", {"null":true})
+	t.Column("price_base_unit", "float", {"null":true})
+	t.Column("sku", "string", {"size": 64})
+	t.Column("name", "string", {"size": 255})
+	t.Column("deleted_at", "datetime", {"null":true})
+	t.Timestamps()
+}

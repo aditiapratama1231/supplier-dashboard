@@ -1,0 +1,11 @@
+create_table("unit_labels") {
+  t.Column("id", "integer", {primary: true})
+  t.Column("name", "string", {})
+  t.Column("created_by", "integer", {"size":10,"null": true})
+  t.Column("updated_by", "integer", {"size":10, "null": true})
+  t.Column("deleted_by", "integer", {"size":10, "null": true})
+  t.Column("created_at", "timestamp", {"null": true})
+  t.Column("updated_at", "timestamp", {"null": true})
+  t.Column("deleted_at", "timestamp", {"null": true})
+  
+}

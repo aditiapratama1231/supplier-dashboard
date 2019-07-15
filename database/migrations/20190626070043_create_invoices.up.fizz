@@ -1,0 +1,13 @@
+create_table("invoices") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("order_id", "integer")
+	t.Column("merchant_id", "integer")
+	t.Column("outlet_id", "integer")
+	t.Column("invoice_no", "string", {"size":64, "null":true})
+	t.Column("status", "tinyint", {"size":1, "null":true})
+	t.Column("total_qty", "float", {"null":true})
+	t.Column("total_amount", "float", {"null":true})
+	t.Column("total_discount", "float", {"null":true})
+	t.Column("deleted_at", "datetime", {"null":true})
+	t.Timestamps()
+}
